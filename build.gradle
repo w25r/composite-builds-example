@@ -1,0 +1,23 @@
+task build {
+    description 'Builds all included projects'
+    group 'Composite Tasks'
+
+    gradle.includedBuilds.each { includedBuild ->
+        dependsOn includedBuild.task(':build')
+    }
+}
+
+task hello {
+    description 'Calls the task "hello" in the library and application projects'
+    group 'Composite Tasks'
+
+    dependsOn gradle.includedBuild('library').task(':hello')
+    dependsOn gradle.includedBuild('application').task(':hello')
+}
+
+task run {
+    description 'Runs the application'
+    group 'Composite Tasks'
+
+    dependsOn gradle.includedBuild('application').task(':run')
+}

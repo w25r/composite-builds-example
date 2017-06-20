@@ -1,0 +1,5 @@
+rootProject.name = 'composite-builds-example'
+
+includeBuild './plugin'
+includeBuild './library'
+includeBuild './application'

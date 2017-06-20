@@ -1,0 +1,23 @@
+buildscript {
+    dependencies {
+        classpath 'org.gradle.example:plugin:0.1.0'
+    }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'plugin'
+apply plugin: 'application'
+
+group 'org.gradle.example'
+version '0.1.0'
+
+mainClassName = 'org.gradle.example.Main'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    api 'org.gradle.example:library:0.1.0:api'
+    runtimeOnly 'org.gradle.example:library:0.1.0:impl'
+}
