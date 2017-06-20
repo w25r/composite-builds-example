@@ -1,4 +1,8 @@
 buildscript {
+    repositories {
+        maven { url "$projectDir/../repo" }
+    }
+
     dependencies {
         classpath 'org.gradle.example:plugin:0.1.0'
     }
@@ -6,6 +10,7 @@ buildscript {
 
 apply plugin: 'java-library'
 apply plugin: 'plugin'
+apply plugin: 'maven-publish'
 
 group 'org.gradle.example'
 version '0.1.0'
@@ -15,10 +20,6 @@ repositories {
 }
 
 dependencies {
-    api 'org.apache.commons:commons-math3:3.6.1'
-
-    implementation 'com.google.guava:guava:21.0'
-
     testImplementation 'junit:junit:4.12'
 }
 
@@ -37,4 +38,18 @@ task implJar(type: Jar) {
 artifacts {
     api apiJar
     implementation implJar
+}
+
+publishing {
+    repositories {
+        maven { url "$projectDir/../repo" }
+    }
+    publications {
+        impl(MavenPublication) {
+            artifact implJar
+        }
+        api(MavenPublication) {
+            artifact apiJar
+        }
+    }
 }

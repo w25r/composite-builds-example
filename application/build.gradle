@@ -1,4 +1,8 @@
 buildscript {
+    repositories {
+        maven { url "$projectDir/../repo" }
+    }
+
     dependencies {
         classpath 'org.gradle.example:plugin:0.1.0'
     }
@@ -14,7 +18,7 @@ version '0.1.0'
 mainClassName = 'org.gradle.example.Main'
 
 repositories {
-    jcenter()
+    maven { url "$projectDir/../repo" }
 }
 
 dependencies {
